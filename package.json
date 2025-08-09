@@ -1,0 +1,15 @@
+{
+  "name": "aegismech",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AEGIS Mechanical site with Vercel function for contact email via Resend",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": "22.0"
+  },
+  "dependencies": {
+    "resend": "^3.3.0"
+  }
+}
+
+
