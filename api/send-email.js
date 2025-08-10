@@ -50,7 +50,7 @@ async function parseRequestBody(req) {
 }
 
 async function verifyRecaptcha(token, remoteIp) {
-  if (!recaptchaSecret || !token) return { ok: true };
+  if (!recaptchaSecret) return { ok: true };
   try {
     const params = new URLSearchParams({
       secret: recaptchaSecret,
