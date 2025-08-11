@@ -100,7 +100,7 @@ module.exports = async (req, res) => {
   // Optional reCAPTCHA verification
   const remoteIp = (req.headers['x-forwarded-for'] || '').split(',')[0]?.trim();
   const recaptchaResult = await verifyRecaptcha(token, remoteIp);
-  console.log('recaptchaResult', recaptchaResult, token, remoteIp);
+  console.log('recaptchaResult', {recaptchaResult, token, remoteIp, body});
   if (!recaptchaResult.ok) {
     return res.status(400).send('reCAPTCHA verification failed.');
   }
