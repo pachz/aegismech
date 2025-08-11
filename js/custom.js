@@ -648,19 +648,34 @@
             target: '#message-sent',
             beforeSubmit: function () {
                 $('#contact-loader').fadeIn('fast');
-                $('#message-sent').fadeOut('fast');
+                $('#message-sent').removeClass('error').fadeOut('fast').text('');
+                $("div.error-container").empty();
+                $('#submit').prop('disabled', true);
             },
-            success: function () {
+            success: function (responseText, statusText, xhr, $form) {
                 $('#contact-loader').fadeOut('fast');
-                $('#message-sent').fadeIn('fast');
+                $('#message-sent').removeClass('error').fadeIn('fast');
                 $('.contact-form').resetForm();
+                $('#submit').prop('disabled', false);
+                if (window.grecaptcha && grecaptcha.reset) {
+                    grecaptcha.reset();
+                }
+            },
+            error: function (xhr) {
+                $('#contact-loader').fadeOut('fast');
+                var message = xhr && xhr.responseText ? xhr.responseText : 'Something went wrong. Please try again.';
+                $("div.error-container").html('<p>' + message + '</p>');
+                $('#message-sent').addClass('error').hide();
+                $('#submit').prop('disabled', false);
+                if (window.grecaptcha && grecaptcha.reset) {
+                    grecaptcha.reset();
+                }
             }
         };
 
         $('.contact-form').validate({
             errorLabelContainer: $("div.error-container"),
             submitHandler: function (form) {
-                console.log('hereee');
                 $(form).ajaxSubmit(contact_options);
             }
         });

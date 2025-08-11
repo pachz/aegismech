@@ -967,35 +967,9 @@
 
 <script>
    function onSubmit(token) {
-       console.log(123);
        document.getElementById('g-token').value = token;
-       
-       
-       
-        var contact_options = {
-            target: '#message-sent',
-            beforeSubmit: function () {
-                jQuery('#contact-loader').fadeIn('fast');
-                jQuery('#message-sent').fadeOut('fast');
-            },
-            success: function () {
-                jQuery('#contact-loader').fadeOut('fast');
-                jQuery('#message-sent').fadeIn('fast');
-                jQuery('.contact-form').resetForm();
-            }
-        };
-        
-        jQuery('.contact-form').ajaxSubmit(contact_options);
-
-        jQuery('.contact-form').validate({
-            errorLabelContainer: jQuery("div.error-container"),
-            submitHandler: function (form) {
-                console.log('hereee');
-                jQuery(form).ajaxSubmit(contact_options);
-            }
-        });
-    
-    
+       // Let the existing validator/submit handler in js/custom.js handle submission
+       jQuery('#contact-form').submit();
    }
 </script>
 

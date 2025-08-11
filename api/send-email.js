@@ -3,7 +3,7 @@
 // - RESEND_API_KEY (required)
 // - CONTACT_TO_EMAIL (required)
 // - CONTACT_FROM_EMAIL (required, should be a verified domain/sender in Resend)
-// - RECAPTCHA_SECRET_KEY (optional; if present and token provided, verifies Google reCAPTCHA)
+// - RECAPTCHA_SECRET_KEY (optional; if present, verifies Google reCAPTCHA)
 
 const { Resend } = require('resend');
 const querystring = require('querystring');
@@ -100,6 +100,7 @@ module.exports = async (req, res) => {
   // Optional reCAPTCHA verification
   const remoteIp = (req.headers['x-forwarded-for'] || '').split(',')[0]?.trim();
   const recaptchaResult = await verifyRecaptcha(token, remoteIp);
+  console.log('recaptchaResult', recaptchaResult);
   if (!recaptchaResult.ok) {
     return res.status(400).send('reCAPTCHA verification failed.');
   }
