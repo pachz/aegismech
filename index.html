@@ -878,7 +878,7 @@
 <br>
 <br>
                 <div class="submit-and-loader">
-                    <input type="hidden" id="g-token" name="g-recaptcha-response" />
+                    <!-- <input type="hidden" id="g-token" name="g-recaptcha-response" /> -->
                     <button type="submit" class="g-recaptcha" data-sitekey="6Le2VakZAAAAABXo1I61FEAS1Lq6beyWtNEzZ6k9" data-callback='onSubmit' data-action='submit' value="Submit Now" id="submit" name="submit">Submit Now</button>
                     <img src="images/ajax-loader-3.gif" id="contact-loader" alt="Loading...">
                 </div>
@@ -968,7 +968,7 @@
 
 <script>
    function onSubmit(token) {
-       document.getElementById('g-token').value = token;
+    //    document.getElementById('g-token').value = token;
        // Let the existing validator/submit handler in js/custom.js handle submission
        jQuery('#contact-form').submit();
    }
